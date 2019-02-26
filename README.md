@@ -1,6 +1,8 @@
 # hmmtrace
 A quick and dirty tool for making sense of mtrace() traces.
 
+Note that this tool is probably abandoned because mtrace(), as it turns out, has limited possibilities while in modern projects stack unwinding is a "must" for obtaining meaninful traces. Consider using [gperftools](https://github.com/gperftools/gperftools), [Valgrind's Massif](http://valgrind.org/docs/manual/ms-manual.html) and other similar tools.
+
 ## Introduction
 mtrace() is a ...
 
@@ -47,8 +49,23 @@ Write down the first address. It is the offset of the `.text` segment `hmmtrace`
 
 ## Using hmmtrace
 
+Currently only sort by total currently allocated size for each line of code is supported:
+```
+$ hmmtrace <tracefile>
+```
+
+You can find out the code location, use `addr2line`:
+```
+$ addr2line -j .text -e /home/undercat/derp/binutils-gdb/gdb/gdb `printf %x $((ADDRESS_SHOWN - TEXT_SEGMENT_OFFSET))`
+```
+where `TEXT_SEGMENT_OFFSET` is the offset of the binary's `.text` segment as described above. Example:
+```
+$ addr2line -j .text -e /home/undercat/derp/binutils-gdb/gdb/gdb `printf %x $((0x55555574d4ce-0x000055555563f0c0))`
+/home/../binutils-gdb/gdb/common/common-utils.c:44
+```
+
 ## TODO
-Automate trace acquisition. It should be possible to run it like this:
+Automate trace acquisition and text segment identification. It should be possible to run it like this:
 ```
 $ hmmtrace <binary>
 ```
