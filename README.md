@@ -1,7 +1,7 @@
 # hmmtrace
 A quick and dirty tool for making sense of mtrace() traces.
 
-Note that this tool is probably abandoned because mtrace(), as it turns out, has limited use in modern practical projects because of its inability to preserve call chain information that lead to the allocation. It is a "must" in projects that allocate memory with a wrapper like `xmalloc` or `new`. Consider using [gperftools](https://github.com/gperftools/gperftools), [Valgrind's Massif](http://valgrind.org/docs/manual/ms-manual.html) and other similar tools.
+Note that this tool is probably abandoned because `mtrace()`, as it turns out, has limited use in modern practical projects because of its inability to preserve call chain information that lead to the allocation. It is a "must" in projects that allocate memory with a wrapper like `xmalloc` or `new`. Consider using [gperftools](https://github.com/gperftools/gperftools), [Valgrind's Massif](http://valgrind.org/docs/manual/ms-manual.html) and other similar tools instead.
 
 ## Introduction
 mtrace() is a ...
