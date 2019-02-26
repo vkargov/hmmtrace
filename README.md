@@ -43,7 +43,12 @@ $ MALLOC_TRACE=/tmp/gdb.trace gdb
 ...
 ```
 
-   Write down the first address. It is the offset of the `.text` segment `hmmtrace` will need it to decrypt those addresses into source code lines.
+Write down the first address. It is the offset of the `.text` segment `hmmtrace` will need it to decrypt those addresses into source code lines.
 
 ## Using hmmtrace
 
+## TODO
+Automate trace acquisition. It should be possible to run it like this:
+```
+$ hmmtrace <binary>
+```
